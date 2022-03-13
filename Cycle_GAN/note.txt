@@ -1,0 +1,6 @@
+
+Blog: https://towardsdatascience.com/image-to-image-translation-using-cyclegan-model-d58cfff04755
+
+Original Git (Pytorch): https://github.com/vjrahil/CycleGAN-in-Pytorch
+
+Tensorflow: https://www.tensorflow.org/tutorials/generative/cyclegan

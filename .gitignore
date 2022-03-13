@@ -28,7 +28,7 @@ debug/
 tensorboard_log/
 saved_models/
 configs_collection/
-*.csv
+datasets/
 
 # Installer logs
 pip-log.txt
@@ -42,7 +42,6 @@ target/
 
 # pyenv
 .python-version
-
 
 # Environments
 .env
@@ -59,3 +58,5 @@ venv.bak/
 *.pt
 
 *.log
+
+*.csv

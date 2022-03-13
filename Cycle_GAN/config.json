@@ -1,0 +1,28 @@
+{
+    "model_name": "CycleGAN",
+
+    "n_epochs": 5000,
+    "batch_size":16,
+    "save_interval":50,
+    "sample_interval": 100,
+
+    "image_size": 128,
+    "g_conv_dim":64,
+    "d_conv_dim":64,
+    "g_num_res_blocks":6,
+
+    "g_lr": 2e-4,
+    "d_lr": 2e-4,
+    "beta1":0.5,
+    "beta2":0.999,
+    "lambda_weight":10,
+
+    "datasets_dir": "datasets/summer2winter_yosemite/",
+    "dataset_name": "summer2winter",
+    "domain_X":"summer",
+    "domain_Y":"winter",
+    "samples_dir": "samples_cyclegan/",
+
+    "log_dir": "tensorboard_log/",
+    "save_dir": "saved_models/"
+}
