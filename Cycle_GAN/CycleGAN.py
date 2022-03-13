@@ -84,15 +84,15 @@ class CycleGAN:
 
             # Reset iterators for each epoch
             if epoch % batches_per_epoch == 0:
-                self.iter_X = iter(self.dataloader_X)
-                self.iter_Y = iter(self.dataloader_Y)
+                iter_X = iter(self.dataloader_X)
+                iter_Y = iter(self.dataloader_Y)
 
             d_x_loss, d_y_loss, g_total_loss = self.update(iter_X, iter_Y)
 
             # Print the log info
             if epoch % 10 == 0:
-                print('Epoch [{:5d}/{:5d}] | d_X_loss: {:6.4f} | d_Y_loss: {:6.4f} | g_total_loss: {:6.4f}'.format(
-                        epoch, self.args.n_epochs, d_x_loss, d_y_loss, g_total_loss), end="\r")
+                print('[{}] Epoch [{:5d}/{:5d}] | d_X_loss: {:6.4f} | d_Y_loss: {:6.4f} | g_total_loss: {:6.4f}'.format(
+                        datetime.now(), epoch, self.args.n_epochs, d_x_loss, d_y_loss, g_total_loss), end="\r")
 
             
             # Save the generated samples
