@@ -99,10 +99,10 @@ class CycleGAN:
             if epoch % self.args.sample_interval == 0:
                 self.G_YtoX.eval() # set generators to eval mode for sample generation
                 self.G_XtoY.eval()
-                save_samples(epoch, fixed_Y, fixed_X, self.G_YtoX, self.G_XtoY, batch_size=self.args.batch_size, sample_dir=self.args.sample_dir)
+                save_samples(epoch, fixed_Y, fixed_X, self.G_YtoX, self.G_XtoY, batch_size=self.args.batch_size, sample_dir=self.args.samples_dir)
                 self.G_YtoX.train()
                 self.G_XtoY.train()
-                view_samples(epoch, sample_dir=self.args.sample_dir)
+                view_samples(epoch, sample_dir=self.args.samples_dir)
 
             self.writer.add_scalar("Loss/dx_loss", d_x_loss, epoch)
             self.writer.add_scalar("Loss/dy_loss", d_y_loss, epoch)

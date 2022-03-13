@@ -20,6 +20,7 @@ import scipy.misc
 
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
+import imageio
 
 # helper visualization code
 def view_samples(iteration, sample_dir='samples_cyclegan'):
@@ -96,10 +97,10 @@ def save_samples(iteration, fixed_Y, fixed_X, G_YtoX, G_XtoY, batch_size=16, sam
     
     merged = merge_images(X, fake_Y, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-X-Y.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
     
     merged = merge_images(Y, fake_X, batch_size)
     path = os.path.join(sample_dir, 'sample-{:06d}-Y-X.png'.format(iteration))
-    scipy.misc.imsave(path, merged)
+    imageio.imwrite(path, merged)
     print('Saved {}'.format(path))
