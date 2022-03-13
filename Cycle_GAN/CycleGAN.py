@@ -89,7 +89,7 @@ class CycleGAN:
             # Print the log info
             if epoch % 10 == 0:
                 print('Epoch [{:5d}/{:5d}] | d_X_loss: {:6.4f} | d_Y_loss: {:6.4f} | g_total_loss: {:6.4f}'.format(
-                        epoch, self.n_epochs, d_x_loss, d_y_loss, g_total_loss))
+                        epoch, self.n_epochs, d_x_loss, d_y_loss, g_total_loss), end="\r")
 
             
             # Save the generated samples
@@ -99,10 +99,12 @@ class CycleGAN:
                 save_samples(epoch, fixed_Y, fixed_X, self.G_YtoX, self.G_XtoY, batch_size=self.args.batch_size, sample_dir=self.args.sample_dir)
                 self.G_YtoX.train()
                 self.G_XtoY.train()
+                view_samples(epoch, sample_dir=self.args.sample_dir)
 
             self.writer.add_scalar("Loss/dx_loss", d_x_loss, epoch)
             self.writer.add_scalar("Loss/dy_loss", d_y_loss, epoch)
             self.writer.add_scalar("Loss/g_total_loss", g_total_loss, epoch)
+
             # Save the model parameters
             if epoch % self.args.save_interval == 0:
                 checkpoint(epoch, self.G_XtoY, self.G_YtoX, self.D_X, self.D_Y, checkpoint_dir=self.args.save_dir)

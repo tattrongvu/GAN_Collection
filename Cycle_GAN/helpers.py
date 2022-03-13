@@ -19,6 +19,7 @@ import scipy
 import scipy.misc
 
 import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
 
 # helper visualization code
 def view_samples(iteration, sample_dir='samples_cyclegan'):
@@ -33,7 +34,8 @@ def view_samples(iteration, sample_dir='samples_cyclegan'):
         y2x = mpimg.imread(path_YtoX)
     except:
         print('Invalid number of iterations.')
-    
+
+    plt.clf()
     fig, (ax1, ax2) = plt.subplots(figsize=(18,20), nrows=2, ncols=1, sharey=True, sharex=True)
     ax1.imshow(x2y)
     ax1.set_title('X to Y')

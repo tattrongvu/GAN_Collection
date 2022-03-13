@@ -3,7 +3,7 @@
 
     "n_epochs": 5000,
     "batch_size":16,
-    "save_interval":50,
+    "save_interval":500,
     "sample_interval": 100,
 
     "image_size": 128,
@@ -21,6 +21,7 @@
     "dataset_name": "summer2winter",
     "domain_X":"summer",
     "domain_Y":"winter",
+    
     "samples_dir": "samples_cyclegan/",
 
     "log_dir": "tensorboard_log/",
