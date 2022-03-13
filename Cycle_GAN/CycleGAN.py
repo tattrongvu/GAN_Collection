@@ -56,6 +56,9 @@ class CycleGAN:
         self.model_path = os.path.join(self.args.save_dir, self.args.model_name)
         if not os.path.exists(self.model_path):
             os.mkdir(self.model_path)
+        
+        if not os.path.exists(self.args.samples_dir):
+            os.mkdir(self.args.samples_dir)
 
 
     def learn(self):
@@ -89,7 +92,7 @@ class CycleGAN:
             # Print the log info
             if epoch % 10 == 0:
                 print('Epoch [{:5d}/{:5d}] | d_X_loss: {:6.4f} | d_Y_loss: {:6.4f} | g_total_loss: {:6.4f}'.format(
-                        epoch, self.n_epochs, d_x_loss, d_y_loss, g_total_loss), end="\r")
+                        epoch, self.args.n_epochs, d_x_loss, d_y_loss, g_total_loss), end="\r")
 
             
             # Save the generated samples

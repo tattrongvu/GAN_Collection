@@ -21,7 +21,7 @@ def get_data_loader(image_type, image_dir='summer2winter_yosemite',
                                     transforms.ToTensor()])
 
     # get training and test directories
-    image_path = './' + image_dir
+    image_path = image_dir
     train_path = os.path.join(image_path, image_type)
     test_path = os.path.join(image_path, 'test_{}'.format(image_type))
 
