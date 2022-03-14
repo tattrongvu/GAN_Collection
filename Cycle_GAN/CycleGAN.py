@@ -25,8 +25,12 @@ class CycleGAN:
         self.G_YtoX = CycleGenerator(self.args.g_conv_dim,self.args.g_num_res_blocks).to(self.device)
 
         # Instantiate discriminators
-        self.D_X = Discriminator(self.args.d_conv_dim).to(self.device)
-        self.D_Y = Discriminator(self.args.d_conv_dim).to(self.device)
+        if self.args.patch_d:
+            self.D_X = Patch_Discriminator(self.args.d_conv_dim).to(self.device)
+            self.D_Y = Patch_Discriminator(self.args.d_conv_dim).to(self.device)
+        else:
+            self.D_X = Discriminator(self.args.d_conv_dim).to(self.device)
+            self.D_Y = Discriminator(self.args.d_conv_dim).to(self.device)
 
         #Optimizer
         self.g_params = list(self.G_XtoY.parameters()) + list(self.G_YtoX.parameters())  # Get generator parameters
@@ -148,7 +152,7 @@ class CycleGAN:
         
         fake_D_y_loss = fake_mse_loss(self.D_Y(self.G_XtoY(images_X)))
         
-        d_y_loss = real_D_y_loss + fake_D_y_loss
+        d_y_loss = 0.5*(real_D_y_loss + fake_D_y_loss)
         d_y_loss.backward()
         self.d_y_optimizer.step()
 

@@ -52,6 +52,31 @@ class ResidualBlock(nn.Module):
         
         return out_2
 
+class Patch_Discriminator(nn.Module):
+    def __init__(self, conv_dim: int=64, in_channels:int = 3):
+        super(Patch_Discriminator, self).__init__()
+
+        # Define all convolutional layers
+        def discriminator_block(in_filters, out_filters, k:int = 4, normalization=True):
+            """Returns downsampling layers of each discriminator block"""
+            layers = [nn.Conv2d(in_filters, out_filters, k, stride=2, padding=1)]
+            if normalization:
+                layers.append(nn.InstanceNorm2d(out_filters))
+            layers.append(nn.LeakyReLU(0.2, inplace=True))
+            return layers
+
+        self.model = nn.Sequential(
+            *discriminator_block(in_channels, conv_dim, normalization=False),
+            *discriminator_block(conv_dim, conv_dim*2),
+            *discriminator_block(conv_dim*2,conv_dim*4),
+            *discriminator_block(conv_dim*4,conv_dim*8),
+            nn.ZeroPad2d((1, 0, 1, 0)),
+            nn.Conv2d(conv_dim*8, 1, 4, padding=1, bias=False)
+        )
+
+    def forward(self, x):
+        return self.model(x)
+
 class Discriminator(nn.Module):
     
     def __init__(self, conv_dim=64):
